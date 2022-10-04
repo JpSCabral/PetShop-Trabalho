@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 char nome[5] [50], endereco[5] [50],email[5] [50],cpf[5] [50], senha [5] [50];
 int i=1, quant, verificacao;
+
 int main (){
  printf("Digite quantos clientes serao cadastrados:\n");
  scanf("%d", &quant);
@@ -42,6 +44,7 @@ int main (){
          case 2:
             printf("Finalizado");
             break;
+            
          default:
             printf("Opcao invalida");
             break;

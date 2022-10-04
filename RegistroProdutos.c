@@ -15,13 +15,10 @@ int main (void){
             printf("Qual tipo desse produto"); //Colocar as opçoes de tipos para o usuario escolher e de acordo com a opçao mandar instruçoes diferentes
         scanf("%s", &tipoDeProduto);
 
-            printf("");
-        scanf("%s", &);
+            printf("Digite o fornecedor deste produto");
+        scanf("%s", &fornecedor);
 
-            printf("");
-        scanf("%s", &);
-
-            printf("");
-        scanf("%s", &);
+            printf("Quantos desse produto vai ser registrado?");
+        scanf("%d", &quantidadeProduto);
     }
 }
