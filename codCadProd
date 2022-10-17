@@ -1,0 +1,274 @@
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+#include <stdlib.h>
+typedef struct lista{
+char nome[50];
+char fornecedor [50];
+char validade [50];
+char preço[50];
+char variedade [50];
+char origem [50];
+unsigned long int codigo;
+struct lista* prox; 
+char aux [50];
+}Lista;
+
+//Declaração de funções.
+Lista* inserir_produtos(Lista* primeiro);
+void listar_produtos(Lista* primeiro);
+Lista* excluir_produtos(Lista* primeiro);
+void alterar_produtos(Lista* primeiro);
+main() 
+{ 
+//Declaração de variáveis
+Lista *primeiro= NULL;
+char opcao;
+
+//Artifício para repetir o programa.
+while(opcao!='s') 
+{ 
+//Menu de opções 
+printf(" %c----------------------------------------------------------------------------%c\n",201,187);
+printf(" | ");printf("\t\t\t CADASTRO DE PRODUTOS");printf("\t\t\t |\n");
+printf(" %c----------------------------------------------------------------------------%c\n",200,188);
+printf("\t %c----------%c\t\t\t\t ",201,187);
+printf("\t\t\t | MENU ");printf("|\t\t\t\t \n");
+printf(" %c-----------%c----------%c------------%c \n",201,200,188,187);
+printf(" | <A> Novo cadastro |\n");
+printf(" |-----------------------------------|\n");
+printf(" | <B> Listar |\n"); 
+printf(" |-----------------------------------|\n");
+printf(" | <C> Excluir cadastro |\n"); 
+printf(" |-----------------------------------|\n");
+printf(" | <D> Alterar cadastro |\n"); 
+printf(" |-----------------------------------|\n");
+printf(" | <S> Sair |\n");
+printf(" %c-----------------------------------%c",200,188);
+printf("\n\n\n\n");
+printf("\t\t\t By Diego, Jefferson e Felipe");
+
+//Lendo a opcao do menu 
+fflush(stdin);
+opcao= getch(); 
+
+//Menu de opções
+switch(opcao)
+{
+case 'A': 
+case 'a': 
+//Inserindo os produtos.
+fflush(stdin);
+system("cls");
+printf(" %c----------------------------------------------------------------------------%c\n",201,187);
+printf(" | ");printf("\t\t\t NOVO CADASTRO ");printf("\t\t\t |\n");
+printf(" %c----------------------------------------------------------------------------%c\n",200,188);
+primeiro= inserir_produtos(primeiro);
+getch();
+system("cls"); 
+break;
+
+case 'B': 
+case 'b': 
+//Listando os produtos.
+system ("cls");
+printf(" %c----------------------------------------------------------------------------%c\n",201,187);
+printf(" | ");printf("\t\t\t PRODUTOS CADASTRADOS");printf("\t\t\t |\n");
+printf(" %c----------------------------------------------------------------------------%c\n",200,188);
+listar_produtos(primeiro);
+getch();
+system("cls");
+break;
+
+case 'C': 
+case 'c': 
+//Excluindo produtos da lista.
+system ("cls");
+printf(" %c----------------------------------------------------------------------------%c\n",201,187);
+printf(" | ");printf("\t\t\t EXCLUIR CADASTROS");printf("\t\t\t |\n");
+printf(" %c----------------------------------------------------------------------------%c\n",200,188);
+primeiro= excluir_produtos(primeiro);
+getch();
+system("cls");
+break;
+case 'D': 
+case 'd': 
+//Alterando produtos da lista. 
+system ("cls");
+printf(" %c----------------------------------------------------------------------------%c\n",201,187);
+printf(" | ");printf("\t\t\t ALTERAR CADASTRADOS");printf("\t\t\t |\n");
+printf(" %c----------------------------------------------------------------------------%c\n",200,188);
+alterar_produtos(primeiro);
+getch();
+system("cls");
+break;
+
+case 'S': 
+case 's': 
+//Artifício para sair do programa.
+opcao='s';
+break;
+
+default: 
+//Artifício que previne a situação de um usuário qualquer, digitar uma opcão inexistente no menu.
+system("cls"); 
+break; 
+} 
+} 
+}
+Lista* inserir_produtos (Lista *primeiro){ 
+Lista produto;
+Lista *atual= primeiro;
+char identificador= 'F';
+
+//Lendo as informações dos produtos.
+printf(" Nome: ");
+fflush (stdin); fgets(produto.nome, 50, stdin); printf ("\n");
+printf(" C%cdigo: ",162);
+scanf("%u",&produto.codigo);printf ("\n");
+printf(" Fornecedor: ");
+fflush (stdin); fgets(produto.fornecedor, 50, stdin); printf ("\n");
+printf(" Validade (dd/mm/aaaa): ");
+fflush (stdin); fgets(produto.validade, 50, stdin); printf ("\n");
+printf(" Pre%co: R$",135);
+fflush (stdin); fgets(produto.preço, 50, stdin); printf ("\n");
+printf(" Variedade: ");
+fflush (stdin); fgets(produto.variedade, 50, stdin); printf ("\n");
+printf(" Origem: ");
+fflush (stdin); fgets(produto.origem, 50, stdin); printf ("\n");
+
+
+//Verificando se o cadastro já existe.
+for(atual=primeiro; atual!=NULL; atual=atual->prox){
+if(atual->codigo==produto.codigo){
+identificador= 'V'; 
+break;
+} 
+}
+if(identificador!='V' && (strlen(produto.nome)!=1 && (strlen(produto.fornecedor)!=1 && strlen(produto.preço)!=1))){
+//Alocando os espaços e guardando as informações do produto.
+Lista* NovoProduto=(Lista*) malloc (sizeof(Lista)); 
+strcpy(NovoProduto->nome, produto.nome);
+strcpy(NovoProduto->fornecedor, produto.fornecedor);
+strcpy(NovoProduto->validade, produto.validade);
+strcpy(NovoProduto->variedade, produto.variedade);
+strcpy(NovoProduto->origem, produto.origem);
+strcpy(NovoProduto->preço, produto.preço);
+NovoProduto->codigo= produto.codigo;
+NovoProduto->prox= primeiro;
+printf(" Cadastro realizado com sucesso.");
+printf("\n\n PRESSIONE QUALQUER TECLA PARA VOLTAR AO MENU PRINCIPAL.");
+return NovoProduto; 
+}else{
+printf(" Cadastro inv%clido.",160);
+printf("\n\n PRESSIONE QUALQUER TECLA PARA VOLTAR AO MENU PRINCIPAL.");
+return primeiro;
+}
+}
+void listar_produtos (Lista* primeiro){
+Lista* atual;//Ponteiro para percorrer a lista sem perder a referência do primeiro elemento da lista.
+
+//Imprimindo os produtos da lista, e suas repectivas informações.
+for(atual= primeiro ; atual!= NULL; atual= atual->prox){
+printf("\n Nome: ");
+printf("%s", atual->nome);
+printf("\n C%cdigo: ",162 );
+printf("%u", atual->codigo);
+printf("\n");
+printf("\n Fornecedor: ");
+printf("%s", atual->fornecedor);
+printf("\n Validade (dd/mm/aaaa): ");
+printf("%s", atual->validade);
+printf("\n Pre%co: R$",135);
+printf("%s", atual->preço);
+printf("\n Variedade: ");
+printf("%s", atual->variedade);
+printf("\n Origem: ");
+printf("%s", atual->origem);
+printf("\n\n");
+}
+if(primeiro==NULL)
+printf(" Nenhum produto cadastrado.");
+printf("\n\n PRESSIONE QUALQUER TECLA PARA VOLTAR AO MENU PRINCIPAL.");
+}
+Lista* excluir_produtos(Lista *primeiro){
+
+Lista *anterior= NULL;//Ponteiro para saber o elemento anterior ao elemento atual da lista.
+Lista *atual= primeiro;//Ponteiro para percorrer a lista sem perder o primeiro elemento da lista.
+unsigned long int codigo=0;
+
+//Requisitando e lendo o código do produto a ser excluído.
+printf(" C%cdigo do produto a ser exclu%cdo: ", 162,161);
+fflush(stdin);
+scanf("%u",&codigo);
+
+//Procurando o produto na lista.
+while(atual!= NULL && atual->codigo!=codigo){
+anterior= atual;
+atual= atual->prox;
+}
+
+//Mensagem caso o produto não seja encontrado.
+if(atual==NULL){
+printf("\n Produto n%co encontrado.", 198); 
+printf("\n\n PRESSIONE QUALQUER TECLA PARA VOLTAR AO MENU PRINCIPAL.");
+return primeiro;
+}
+
+//Excluindo o primeiro produto da lista. 
+if(anterior==NULL){
+printf("\n Conte%cdo exclu%cdo com sucesso.", 163,161); 
+primeiro= atual->prox;
+//Excluindo um produto do meio da lista.
+}else{
+printf("\n Conte%cdo exclu%cdo com sucesso.", 163,161);
+anterior->prox= atual->prox;
+}
+
+//Desalocando o espaço da memória.
+free(atual);
+printf("\n\n PRESSIONE QUALQUER TECLA PARA VOLTAR AO MENU PRINCIPAL.");
+return primeiro; 
+}
+//Função para alterar produtos.
+void alterar_produtos(Lista* primeiro){ 
+char nome_substituto[40], fornecedor_substituto[40], validade_substituto[40], preco_substituto[40], variedade_substituto[40], origem_substituto[40];
+unsigned long int codigo; 
+Lista* atual=primeiro;
+
+//Requisitando e lendo o código do produto a ser alterado.
+printf(" C%cdigo do produto a ser alterado: ", 162);
+fflush(stdin);
+scanf("%u",&codigo);
+
+//Procurando o produto na lista.
+while(atual!= NULL && atual->codigo!=codigo){
+atual= atual->prox;
+}
+
+//Alterando os dados do produto.
+if(atual!=NULL){
+printf("\n Novo nome: ");
+fflush (stdin); fgets(nome_substituto, 50, stdin); 
+strcpy(atual->nome,nome_substituto);
+printf("\n Novo pre%co: R$",135);
+fflush (stdin); fgets(preco_substituto, 50, stdin); 
+strcpy(atual->preço,preco_substituto);
+printf("\n Novo fornecedor: ");
+fflush (stdin); fgets(fornecedor_substituto, 50, stdin); 
+strcpy(atual->fornecedor,fornecedor_substituto);
+printf("\n Nova validade (dd/mm/aaaa): ");
+fflush (stdin); fgets(validade_substituto, 50, stdin); 
+strcpy(atual->validade,validade_substituto);
+printf("\n Nova variedade: ");
+fflush (stdin); fgets(variedade_substituto, 50, stdin); 
+strcpy(atual->variedade,variedade_substituto);
+printf("\n Nova origem: ");
+fflush (stdin); fgets(origem_substituto, 50, stdin); 
+strcpy(atual->origem,origem_substituto);
+printf ("\n");
+printf(" Dados alterados com sucesso.");
+}else{
+printf("\n Produto n%co encontrado.",198);
+}
+printf("\n\n\n PRESSIONE QUALQUER TECLA PARA VOLTAR AO MENU PRINCIPAL.");
