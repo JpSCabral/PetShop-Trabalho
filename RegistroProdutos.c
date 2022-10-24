@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-char nome[5] [50], diaDeCadastro[5] [50], tipoDeProduto[5] [50], fornecedor[5] [50];
+char nome[5][50], diaDeCadastro[5][50], tipoDeProduto[5][50], fornecedor[5][50];
 int idProduto, quantidadeProduto, i=1, qntExec;
 
 int main (void){
@@ -12,9 +12,8 @@ int main (void){
             printf("Qual a data de cadastro desse produto?");
         scanf("%s", &diaDeCadastro);
 
-            printf("Qual tipo desse produto"); //Colocar as opçoes de tipos para o usuario escolher e de acordo com a opçao mandar instruçoes diferentes
+            printf("Qual tipo desse produto"); 
         scanf("%s", &tipoDeProduto);
-
             printf("Digite o fornecedor deste produto");
         scanf("%s", &fornecedor);
 
