@@ -10,23 +10,23 @@ int main (){
 
    for (i=0; i < quant; i++){
     printf("Digite o nome do cliente:\n");
-    scanf("%s", & nome);
+    gets(nome);
     fflush (stdin);
     
     printf("Digite o endereço do cliente:\n");
-    scanf("%s", & endereco);
+    gets(endereco);
     fflush (stdin);
 
     printf("Digite o email do cliente:\n");
-    scanf("%s", & email);
+    gets(email);
     fflush (stdin);
 
     printf("Digite o CPF do cliente:\n");
-    scanf("%s", & cpf);
+    gets(cpf);
     fflush (stdin);
 
     printf("Digite a senha do cliente:\n");
-    scanf("%s", & senha);
+    gets(cpf);
     fflush (stdin);
    }  
       printf("Deseja visualizar os clientes cadastrados?\n 1-sim\n 2-nao\n");
