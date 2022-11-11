@@ -12,23 +12,22 @@ int main(){
     for(i=0;i<quant;i++){
         printf("Digite nome: ");
         fflush(stdin);
-
         gets(name[i]);
+        
         printf("Digite endereco: ");
         fflush(stdin);
-
         gets(endereco[i]);
+        
         printf("Digite cidade: ");
         fflush(stdin);
-
         gets(cidade[i]);
+        
         printf("Digite estado: ");
         fflush(stdin);
-
         gets(telefone[i]);
+        
         printf("Digite CPF/CNPJ: ");
         fflush(stdin);
-
         gets(cpf[i]);
     }
     printf("\n-------------------------------------------------------------------------------\n");
